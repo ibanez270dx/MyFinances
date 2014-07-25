@@ -34,4 +34,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Plaid API configuration
+  Plaid.config do |config|
+    config.customer_id = SECRETS[:plaid][:client_id]
+    config.secret = SECRETS[:plaid][:secret]
+  end
 end

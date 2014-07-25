@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+SECRETS = {}
+
 module MyFinances
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -19,5 +21,15 @@ module MyFinances
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.before_configuration do
+      path = File.join(Rails.root, 'config','secrets')
+      Dir.foreach(path) do |file|
+        if /\w/ =~ file
+          hash = YAML.load(File.read("#{path}/#{file}")).with_indifferent_access
+          SECRETS["#{file.split('.').first}".to_sym] = hash[Rails.env].symbolize_keys
+        end
+      end
+    end
   end
 end
