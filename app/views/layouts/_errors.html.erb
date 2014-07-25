@@ -1,0 +1,10 @@
+<% if klass.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>There are <%= klass.errors.count %> <%= "problems".pluralize(klass.errors.count) %> with the form:</h4>
+    <ul>
+      <% klass.errors.each do |field, error| %>
+        <li><%= field.to_s.humanize %> <%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
