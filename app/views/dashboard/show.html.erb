@@ -1,0 +1,27 @@
+<%= @account.inspect %>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Type</th>
+      <th>Available</th>
+      <th>Current</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @account[:accounts].each do |account| %>
+      <tr>
+        <td><%= account['meta']['name'] %></td>
+        <td><%= account['type'] %></td>
+        <td><%= account['balance']['available'] %></td>
+        <td><%= account['balance']['current'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<hr />
+
+<%= @transactions.inspect %>

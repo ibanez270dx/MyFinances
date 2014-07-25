@@ -1,0 +1,30 @@
+<h1>Get Transaction History</h1>
+
+<%= form_tag show_path do %>
+  <div class="form-group">
+    <%= label_tag :bank %>
+    <select name="bank" class="form-control">
+      <option value="amex">American Express</option>
+      <option value="bofa">Bank of America</option>
+      <option value="chase">Chase</option>
+      <option value="citi">Citi</option>
+      <option value="us">US Bank</option>
+      <option value="usaa">USAA</option>
+      <option value="wells">Wells Fargo</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <%= label_tag :username %>
+    <%= text_field_tag :username, nil, class: 'form-control', placeholder: 'Username' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :password %>
+    <%= password_field_tag :password, nil, class: 'form-control' %>
+
+  </div>
+  <div class="form-group">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, nil, class: 'form-control', placeholder: 'Email' %>
+  </div>
+  <%= submit_tag 'Submit', class: 'btn btn-default' %>
+<% end %>
