@@ -9,5 +9,8 @@ module ApplicationHelper
     end
   end
 
+  def is_controller?(name)
+    controller.controller_name == name
+  end
 
 end

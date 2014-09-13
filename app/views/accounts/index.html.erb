@@ -1,0 +1,29 @@
+<h1>Accounts</h1>
+<%= link_to new_account_path, class: 'btn btn-primary' do %>
+  <i class="glyphicon glyphicon-plus"></i>
+  New Account
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Bank</th>
+      <th>Access Token</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= Account::PLAID.key(account.bank) %></td>
+        <td style="max-width:450px;word-wrap:break-word;"><%= account.access_token %></td>
+        <td><%= account.email %></td>
+        <td>
+          <%= link_to 'Edit', edit_account_path(account), class: 'btn btn-default' %>
+          <%= link_to 'Delete', account_path(account), method: :delete, 'data-confirm'=>'Are you sure?', class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

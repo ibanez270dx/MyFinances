@@ -1,30 +1,32 @@
-<h1>Get Transaction History</h1>
-
-<%= form_tag show_path do %>
-  <div class="form-group">
-    <%= label_tag :bank %>
-    <select name="bank" class="form-control">
-      <option value="amex">American Express</option>
-      <option value="bofa">Bank of America</option>
-      <option value="chase">Chase</option>
-      <option value="citi">Citi</option>
-      <option value="us">US Bank</option>
-      <option value="usaa">USAA</option>
-      <option value="wells">Wells Fargo</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <%= label_tag :username %>
-    <%= text_field_tag :username, nil, class: 'form-control', placeholder: 'Username' %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :password %>
-    <%= password_field_tag :password, nil, class: 'form-control' %>
-
-  </div>
-  <div class="form-group">
-    <%= label_tag :email %>
-    <%= text_field_tag :email, nil, class: 'form-control', placeholder: 'Email' %>
-  </div>
-  <%= submit_tag 'Submit', class: 'btn btn-default' %>
+<h1>Transactions</h1>
+<%= link_to new_account_path, class: 'btn btn-primary' do %>
+  <i class="glyphicon glyphicon-plus"></i>
+  New Account
 <% end %>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Meta</th>
+      <th>Score</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @transactions %>
+      <% @transactions.each do |transaction| %>
+        <tr class="<%= 'warning' if transaction['pending']=="true" %>">
+          <td class="transaction-amount"><%= number_to_currency(transaction['amount']) %></td>
+          <td class="transaction-date"><%= transaction['date'] %></td>
+          <td class="transaction-name"><%= transaction['name'] %></td>
+          <td class="transaction-meta"><%= transaction['meta'] %></td>
+          <td class="transaction-score"><%= transaction['score'] %></td>
+          <td class="transaction-type"><%= transaction['type'] %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

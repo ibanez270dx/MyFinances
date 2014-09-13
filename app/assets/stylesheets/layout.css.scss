@@ -1,0 +1,52 @@
+
+////////////////////////////////////////////////
+// Utility
+////////////////////////////////////////////////
+
+.flash.alert {
+  width:500px;
+  margin-top: 20px;
+  margin-left:-250px;
+  left:50%;
+  position:absolute;
+  text-align:center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9),0 1px 2px rgba(0,0,0,0.4)
+}
+
+.alert-error h4 {
+  margin-bottom:10px;
+}
+
+.field_with_errors input, .field_with_errors textarea {
+  border:1px solid #b94a48;
+}
+
+div.navbar-login {
+  ul {
+    float: right;
+    margin: 5px 0px;
+
+    li {
+      padding: 10px 5px;
+      display: inline-block;
+      &:first-child a {
+        font-weight: bold;
+        color: #ffffff;
+        .glyphicon {
+          padding-left: 3px;
+          top: 4px;
+          font-size: 18px;
+          line-height: 0px;
+        }
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+span.separator {
+  border-left: 1px solid #555555;
+  border-right: 1px solid #aaaaaa;
+}

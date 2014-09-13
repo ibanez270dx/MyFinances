@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725024102) do
+ActiveRecord::Schema.define(version: 20140730053704) do
+
+  create_table "accounts", force: true do |t|
+    t.integer "user_id"
+    t.integer "plaid_id"
+    t.string  "institution"
+    t.string  "name"
+    t.string  "kind"
+  end
+
+  create_table "tokens", force: true do |t|
+    t.integer  "user_id"
+    t.string   "bank"
+    t.string   "access_token"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
