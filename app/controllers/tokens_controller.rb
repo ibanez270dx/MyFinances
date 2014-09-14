@@ -9,7 +9,10 @@ class TokensController < ApplicationController
   end
 
   def create
-    if @token = current_user.tokens.create(token_params)
+    @token = Token.new token_params
+    @token.user = current_user
+
+    if @token.save
       flash[:success] = "Token created successfully!"
       redirect_to root_path
     else

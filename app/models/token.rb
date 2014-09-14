@@ -6,9 +6,20 @@ class Token < ActiveRecord::Base
   validates :bank, presence: true
   validates :username, presence: true
   validates :password, presence: true
-  validates :access_token, presence: true
+  validates :email, presence: true
+  validates :user_id, presence: true
 
   attr_accessor :username, :password
+
+  PLAID = {
+    "American Express" => "amex",
+    "Bank of America" => "bofa",
+    "Chase" => "chase",
+    "Citi" => "citi",
+    "US Bank" => "us",
+    "USAA" => "usaa",
+    "Wells Fargo" => "wells"
+  }
 
   private
 

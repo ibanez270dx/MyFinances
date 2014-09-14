@@ -1,9 +1,11 @@
 <h1><i class="glyphicon glyphicon-link"></i> Add Token</h1>
 
+<%= (render partial: '/layouts/errors', formats: [:html], locals: { klass: @token }) if @token %>
+
 <%= form_for @token do |f| %>
   <div class="form-group">
     <%= f.label :bank %>
-    <%= f.select :bank, Account::PLAID, {}, class: 'form-control' %>
+    <%= f.select :bank, Token::PLAID, {}, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :username %>
@@ -12,7 +14,6 @@
   <div class="form-group">
     <%= f.label :password %>
     <%= f.password_field :password, class: 'form-control' %>
-
   </div>
   <div class="form-group">
     <%= f.label :email %>

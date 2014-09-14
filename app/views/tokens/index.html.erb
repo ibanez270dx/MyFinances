@@ -19,7 +19,6 @@
         <td style="max-width:450px;word-wrap:break-word;"><%= token.access_token %></td>
         <td><%= token.email %></td>
         <td>
-          <%= link_to 'Edit', edit_token_path(token), class: 'btn btn-default' %>
           <%= link_to 'Delete', token_path(token), method: :delete, 'data-confirm'=>'Are you sure?', class: 'btn btn-danger' %>
         </td>
       </tr>
