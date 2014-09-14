@@ -39,4 +39,4 @@ gem 'bcrypt', '~> 3.1.7'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'plaid'
+gem 'plaid', git: 'git://github.com/ibanez270dx/plaid-ruby.git'

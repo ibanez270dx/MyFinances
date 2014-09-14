@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :tokens
 
-  resources :widgets
+  get  'widgets'=>'widgets#index', as: :widgets
+  get  'widget/:name/add'=>'widgets#add', as: :add_widget
+  post 'widget/:name/add'=>'widgets#configure', as: :configure_widget
 
 end

@@ -1,0 +1,8 @@
+<h1>Add <%= @widget.name %></h1>
+
+<%= form_tag configure_widget_path(@widget.url_name) do %>
+
+  <%= render partial: "widgets/forms/#{params[:name].underscore}" %>
+
+  <%= submit_tag 'Save Changes', name: 'save', class: 'btn btn-primary' %>
+<% end %>

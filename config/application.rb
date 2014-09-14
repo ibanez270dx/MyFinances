@@ -22,6 +22,7 @@ module MyFinances
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Load all my App secrets
     config.before_configuration do
       path = File.join(Rails.root, 'config','secrets')
       Dir.foreach(path) do |file|
@@ -31,5 +32,11 @@ module MyFinances
         end
       end
     end
+
+    # Add and require extensions
+    config.autoload_paths += Dir[File.join(Rails.root, "lib", "extensions", "*.rb")].each {|l| require l }
+
+    # Add Widget STI classes
+    config.autoload_paths += %W(#{config.root}/app/models/widget)
   end
 end

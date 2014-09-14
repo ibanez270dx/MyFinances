@@ -1,0 +1,10 @@
+<div class="well">
+  <% current_user.available_accounts.each do |account| %>
+    <div class="checkbox">
+      <%= label_tag do %>
+        <%= check_box_tag "accounts[]", account["_id"] %>
+        <strong><%= Token::PLAID.key(account["institution_type"]) %></strong> <%= account["meta"]["official_name"] %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
