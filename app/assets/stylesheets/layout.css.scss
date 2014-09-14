@@ -1,10 +1,10 @@
 
 ////////////////////////////////////////////////
-// Global Layout
+// Global Layout / Bootstrap Overrides
 ////////////////////////////////////////////////
 
 .navbar-inverse {
-  background-color: #2f4251;
+  background-color: #364b5c;
   background-image: none;
   .navbar-brand {
     font-family: 'Bitter', serif;
@@ -19,6 +19,11 @@ h1 {
   .glyphicon { top: 4px; }
   font-family: 'Bitter', serif;
   font-weight: 700;
+}
+
+.btn {
+  background-image: none;
+  &.btn-primary { background-color: #364b5c; border: none; }
 }
 
 ////////////////////////////////////////////////
