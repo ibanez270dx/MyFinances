@@ -11,3 +11,8 @@ body {
   word-wrap: normal;
   white-space: nowrap;
 }
+
+
+html.dashboard {
+  body { padding-top: 80px; }
+}

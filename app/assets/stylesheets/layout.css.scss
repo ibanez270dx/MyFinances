@@ -31,12 +31,21 @@ h1 {
 }
 
 .btn {
+  border: none;
   background-image: none;
-  &.btn-primary { background-color: #364b5c; border: none; }
+  &.btn-primary {
+    background-color: #435a6d;
+    &:hover { background-color: #364b5c; }
+  }
 }
 
 .alert {
   background-image: none;
+}
+
+.well {
+  background-image: none;
+  h3:first-of-type { margin-top: 0px; }
 }
 
 ////////////////////////////////////////////////

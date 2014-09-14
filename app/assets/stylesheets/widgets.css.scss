@@ -1,0 +1,12 @@
+// Place all the styles related to the widgets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.empty-widget {
+  min-height: 150px;
+  text-align: center;
+  h1 {
+    margin-top: 30px;
+    text-shadow: 0px 1px 0px #fff;
+    color: #ccc; 
+  }
+}
