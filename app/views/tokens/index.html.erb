@@ -1,0 +1,28 @@
+<h1><i class="glyphicon glyphicon-link"></i> Tokens</h1>
+<%= link_to new_token_path, class: 'btn btn-primary' do %>
+  <i class="glyphicon glyphicon-plus"></i> <strong>New</strong>
+<% end %>
+<br />&nbsp;<br />
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Bank</th>
+      <th>Access Token</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tokens.each do |token| %>
+      <tr>
+        <td><%= Token::PLAID.key(token.bank) %></td>
+        <td style="max-width:450px;word-wrap:break-word;"><%= token.access_token %></td>
+        <td><%= token.email %></td>
+        <td>
+          <%= link_to 'Edit', edit_token_path(token), class: 'btn btn-default' %>
+          <%= link_to 'Delete', token_path(token), method: :delete, 'data-confirm'=>'Are you sure?', class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

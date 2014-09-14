@@ -1,6 +1,6 @@
-<h1>Add Account</h1>
+<h1><i class="glyphicon glyphicon-link"></i> Add Token</h1>
 
-<%= form_for @account do |f| %>
+<%= form_for @token do |f| %>
   <div class="form-group">
     <%= f.label :bank %>
     <%= f.select :bank, Account::PLAID, {}, class: 'form-control' %>

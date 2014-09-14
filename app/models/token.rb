@@ -1,9 +1,12 @@
 class Token < ActiveRecord::Base
 
   belongs_to :user
-  before_create :authenticate
+  before_create :authenticate_plaid
 
-  # validates :access_token, presence: true
+  validates :bank, presence: true
+  validates :username, presence: true
+  validates :password, presence: true
+  validates :access_token, presence: true
 
   attr_accessor :username, :password
 

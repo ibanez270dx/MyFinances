@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   match 'login'=>'users#login', via: [ :get, :post ], as: :login
   get 'logout'=>'users#logout', as: :logout
 
-  resources :accounts
+  resources :tokens
 
 end
