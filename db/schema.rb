@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914021603) do
+ActiveRecord::Schema.define(version: 20140915011522) do
 
   create_table "accounts", force: true do |t|
     t.integer "user_id"
-    t.integer "plaid_id"
-    t.string  "institution"
+    t.integer "token_id"
     t.string  "name"
-    t.string  "kind"
+    t.text    "data"
+    t.string  "service"
   end
 
   create_table "tokens", force: true do |t|

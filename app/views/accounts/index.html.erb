@@ -1,0 +1,27 @@
+<h1><i class="glyphicon glyphicon-link"></i> Accounts</h1>
+<%= link_to new_token_path, class: 'btn btn-primary' do %>
+  <i class="glyphicon glyphicon-plus"></i> <strong>New</strong>
+<% end %>
+<br />&nbsp;<br />
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Number</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= Token::PLAID.key(account.token.bank) %></td>
+        <td><%= account.name %></td>
+        <td><%= account.type %></td>
+        <td><%= account.number %></td>
+        <td>blah</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
