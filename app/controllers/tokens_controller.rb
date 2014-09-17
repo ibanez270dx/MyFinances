@@ -6,6 +6,24 @@ class TokensController < ApplicationController
 
   def new
     @token = Token.new
+    # Rails.cache.fetch('get_institutions') do
+      @institutions = Plaid.call.get_institutions()
+
+      @institution_options = @institutions.inject({}) do |memo, institution|
+        memo[institution['name']] = institution['type']
+        memo
+      end
+    # end
+  end
+
+  def step1
+    @token = Token.new token_params
+    response = Plaid.call.add_account(@token.institution, @token.username, @token.password, @token.email)
+
+    self[:access_token] = response[:access_token]
+    response[:accounts].each do |account|
+      Account.create(user: user, token: self, name: account['meta']['official_name'], data: account, service: 'plaid')
+    end
   end
 
   def create
@@ -44,7 +62,7 @@ class TokensController < ApplicationController
   private
 
     def token_params
-      params.require(:token).permit(:bank, :username, :password, :email)
+      params.require(:token).permit(:institution, :username, :password, :email)
     end
 
 end

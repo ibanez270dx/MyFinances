@@ -6,7 +6,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Bank</th>
+      <th>Institution</th>
       <th>Access Token</th>
       <th>Email</th>
       <th>Actions</th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @tokens.each do |token| %>
       <tr>
-        <td><%= Token::PLAID.key(token.bank) %></td>
+        <td><%= Token::PLAID.key(token.institution) %></td>
         <td style="max-width:450px;word-wrap:break-word;"><%= token.access_token %></td>
         <td><%= token.email %></td>
         <td>

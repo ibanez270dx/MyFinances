@@ -8,6 +8,19 @@ class Account < ActiveRecord::Base
 
   serialize :data, JSON
 
+  PLAID = {
+    "amex" => "American Express",
+    "bofa" => "Bank of America",
+    "capone360" => "Capital One 360",
+    "schwab" => "Charles Schwab",
+    "chase" => "Chase",
+    "citi" => "Citi",
+    "fidelity" => "Fidelity",
+    "usaa" => "USAA",
+    "us" => "US Bank",
+    "wells" => "Wells Fargo"
+  }
+
   def name
     self[:name] || case service
     when "plaid" then data['meta']['name']
@@ -25,4 +38,9 @@ class Account < ActiveRecord::Base
     when "plaid" then data['meta']['number']
     end.strip
   end
+
+  def institution_name
+    PLAID[token.institution] if token
+  end
+
 end

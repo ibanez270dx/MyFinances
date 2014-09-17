@@ -41,7 +41,7 @@
         <% if current_user %>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="<%= 'active' if is_controller?('accounts') %>"><%= link_to 'Accounts', accounts_path %></li>
+              <li class="<%= 'active' if is_controller?('accounts') || is_controller?('tokens') %>"><%= link_to 'Accounts', accounts_path %></li>
               <li class="<%= 'active' if is_controller?('widgets') %>"><%= link_to 'Widgets', widgets_path %></li>
             </ul>
           </div>

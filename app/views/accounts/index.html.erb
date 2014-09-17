@@ -6,7 +6,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Token</th>
+      <th>Institution</th>
       <th>Name</th>
       <th>Type</th>
       <th>Number</th>
@@ -16,7 +16,7 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= Token::PLAID.key(account.token.bank) %></td>
+        <td><%= account.institution_name %></td>
         <td><%= account.name %></td>
         <td><%= account.type %></td>
         <td><%= account.number %></td>
