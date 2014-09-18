@@ -2,14 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'page:load', ->
+$(document).ready ->
 
   # Institution Selector Change
-  $('#token_institution').on 'change', (event) ->
+  $('#institution').on 'change', (event) ->
     institution = $(this).val()
+    $(".js-credentials:visible input").prop('disabled', true)
     $(".js-credentials:visible").slideUp 'fast', (event) ->
+      $(".js-credentials.#{institution} input").prop('disabled', false)
       $(".js-credentials.#{institution}").slideDown('fast')
 
   # Open the first selection on ready
-  institution = $('#token_institution').val()
+  institution = $('#institution').val()
   $(".js-credentials.#{institution}").show()
+  $(".js-credentials.#{institution} input").prop('disabled', false)

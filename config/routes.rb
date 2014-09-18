@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   resources :accounts
   resources :tokens
+  post 'tokens/request'=>'tokens#request_token', as: :request_token
+  post 'tokens/request/mfa'=>'tokens#request_mfa_code', as: :request_mfa_code
+  post 'tokens/submit/mfa'=>'tokens#submit_mfa_code', as: :submit_mfa_code
 
   get  'widgets'=>'widgets#index', as: :widgets
   get  'widget/:name/add'=>'widgets#add', as: :add_widget

@@ -2,21 +2,25 @@
 
 <%= (render partial: '/layouts/errors', formats: [:html], locals: { klass: @token }) if @token %>
 
-<%= form_for @token do |f| %>
+<%= form_tag request_token_path do %>
   <div class="form-group">
-    <%= f.label :institution %>
-    <%= f.select :institution, @institution_options, {}, class: 'form-control' %>
+    <%= label_tag :institution %>
+    <%= select_tag :institution, options_for_select(@institution_options), class: 'form-control' %>
   </div>
   <% @institutions.each do |institution| %>
     <div class="js-credentials <%= institution['type'] %>">
       <% credentials = Hash[institution['credentials'].to_a.reverse] %>
       <% credentials.each do |label, value| %>
         <div class="form-group">
-          <%= f.label label, value %>
-          <%= f.text_field label, class: 'form-control', placeholder: value %>
+          <%= label_tag label, value %>
+          <% if label=="password" %>
+            <%= password_field_tag "credentials[#{label}]", nil, class: 'form-control', placeholder: value, disabled: true %>
+          <% else %>
+            <%= text_field_tag "credentials[#{label}]", nil, class: 'form-control', placeholder: value, disabled: true %>
+          <% end %>
         </div>
       <% end %>
     </div>
   <% end %>
-  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <%= submit_tag 'Submit', class: 'btn btn-primary' %>
 <% end %>

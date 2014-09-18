@@ -1,0 +1,9 @@
+<h1><%= @response['mfa']['message'] %></h1>
+<%= form_tag submit_mfa_code_path do %>
+  <div class="form-group">
+    <%= text_field_tag "code", nil, class: 'form-control', placeholder: 'Verification Code' %>
+  </div>
+  <%= hidden_field_tag "institution", @institution %>
+  <%= hidden_field_tag "access_token", @response['access_token'] %>
+  <%= submit_tag 'Continue', class: 'btn btn-primary' %>
+<% end %>

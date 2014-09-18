@@ -1,0 +1,15 @@
+<h1>Your bank uses a 2-Step verification system.</h1>
+<h3>Choose delivery method:</h3>
+<%= form_tag request_mfa_code_path do %>
+  <% @response['mfa'].each do |mfa| %>
+    <div class="radio">
+      <%= label_tag mfa['type'] do %>
+        <%= radio_button_tag "delivery", mfa['mask'], (mfa['type']=="email") %>
+        <%= mfa['mask'] %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= hidden_field_tag "institution", @institution %>
+  <%= hidden_field_tag "access_token", @response['access_token'] %>
+  <%= submit_tag 'Continue', class: 'btn btn-primary' %>
+<% end %>

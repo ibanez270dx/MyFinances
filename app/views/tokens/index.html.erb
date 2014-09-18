@@ -8,16 +8,16 @@
     <tr>
       <th>Institution</th>
       <th>Access Token</th>
-      <th>Email</th>
+      <th>Created At</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @tokens.each do |token| %>
       <tr>
-        <td><%= Token::PLAID.key(token.institution) %></td>
+        <td><%= Account::PLAID[token.institution] %></td>
         <td style="max-width:450px;word-wrap:break-word;"><%= token.access_token %></td>
-        <td><%= token.email %></td>
+        <td><%= token.created_at %></td>
         <td>
           <%= link_to 'Delete', token_path(token), method: :delete, 'data-confirm'=>'Are you sure?', class: 'btn btn-danger' %>
         </td>
