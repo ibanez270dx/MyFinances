@@ -1,8 +1,17 @@
 <h1><i class="glyphicon glyphicon-link"></i> Accounts</h1>
-<%= link_to new_token_path, class: 'btn btn-primary' do %>
-  <i class="glyphicon glyphicon-plus"></i> <strong>New</strong>
-<% end %>
-<br />&nbsp;<br />
+
+<div class="btn-group-separate">
+  <%= link_to new_token_path, class: 'btn btn-primary' do %>
+    <i class="glyphicon glyphicon-plus"></i> <strong>New</strong>
+  <% end %>
+
+  <% unless @accounts.empty? %>
+    <%= link_to refresh_accounts_path, class: 'btn btn-warning' do %>
+      <i class="glyphicon glyphicon-refresh"></i> <strong>Refresh Account Data</strong>
+    <% end %>
+  <% end %>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -10,6 +19,7 @@
       <th>Name</th>
       <th>Type</th>
       <th>Number</th>
+      <th>Balance</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -20,6 +30,7 @@
         <td><%= account.name %></td>
         <td><%= account.type %></td>
         <td><%= account.number %></td>
+        <td><%= account.balance %></td>
         <td>blah</td>
       </tr>
     <% end %>

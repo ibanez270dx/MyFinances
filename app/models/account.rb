@@ -39,6 +39,12 @@ class Account < ActiveRecord::Base
     end.strip
   end
 
+  def balance
+    case service
+    when "plaid" then data['balance']
+    end
+  end
+
   def institution_name
     PLAID[token.institution] if token
   end

@@ -33,9 +33,14 @@ h1 {
 .btn {
   border: none;
   background-image: none;
+
   &.btn-primary {
     background-color: #435a6d;
     &:hover { background-color: #364b5c; }
+  }
+  &.btn-warning {
+    background-color: #f39c12;
+    &:hover { background-color: #e99510; }
   }
 }
 
@@ -46,6 +51,14 @@ h1 {
 .well {
   background-image: none;
   h3:first-of-type { margin-top: 0px; }
+}
+
+.btn-group-separate {
+  .btn {
+    margin: 0px 5px;
+    &:first-of-type { margin-left: 0px; }
+    &:last-of-type { margin-right: 0px; }
+  }
 }
 
 ////////////////////////////////////////////////

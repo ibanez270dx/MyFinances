@@ -22,19 +22,33 @@ class TokensController < ApplicationController
       secret: SECRETS[:plaid][:secret],
       credentials: params[:credentials],
       email: current_user.email,
-      type: params[:institution],
-      options: {
-        list: true
-      }
+      type: params[:institution]
     }
+
+    if %w(bofa chase us usaa).include?(params[:institution])
+      options.merge!({ options: { list: true }})
+    end
+
+    Rails.logger.debug "================================================================================"
+    Rails.logger.debug options.inspect
+    Rails.logger.debug "================================================================================"
 
     begin
       response = RestClient.post "https://tartan.plaid.com/connect", options
       @response = JSON.parse(response)
-    rescue Exception => e
-      flash[:error] = "Could not authorize."
+    rescue RestClient::ExceptionWithResponse => e
+      error = JSON.parse(e.response)
+      flash[:error] = "<strong>Error #{error['code']}:</strong> #{error['resolve']}"
+      redirect_to new_token_path and return
+    rescue RestClient::Exception => e
+      error = JSON.parse(e.response)
+      flash[:error] = "<strong>#{error.message}</strong>"
       redirect_to new_token_path and return
     end
+
+    Rails.logger.debug "================================================================================"
+    Rails.logger.debug @response.inspect
+    Rails.logger.debug "================================================================================"
 
     @institution = params[:institution]
 
@@ -42,11 +56,7 @@ class TokensController < ApplicationController
       render 'tokens/mfa/code/delivery_method'
     else
       if token = Token.create(user: current_user, institution: params[:token][:institution], access_token: @response['access_token'])
-        if @response.has_key?('accounts')
-          @response['accounts'].each do |account|
-            Account.create(user: user, token: token, name: account['meta']['official_name'], data: account, service: 'plaid')
-          end
-        end
+        parse_and_create_accounts(@response, token)
         flash[:success] = "Account token created successfully!"
         redirect_to accounts_path and return
       else
@@ -89,29 +99,12 @@ class TokensController < ApplicationController
     @institution = params[:institution]
 
     if token = Token.create(user: current_user, institution: @institution, access_token: @response['access_token'])
-      if @response.has_key?('accounts')
-        @response['accounts'].each do |account|
-          Account.create(user: current_user, token: token, name: account['meta']['official_name'], data: account, service: 'plaid')
-        end
-      end
+      parse_and_create_accounts(@response, token)
       flash[:success] = "Account token created successfully!"
       redirect_to accounts_path and return
     else
       flash[:error] = "Something went wrong!"
       redirect_to accounts_path and return
-    end
-  end
-
-
-  def create
-    @token = Token.new token_params
-    @token.user = current_user
-
-    if @token.save
-      flash[:success] = "Token created successfully!"
-      redirect_to root_path
-    else
-      render :new
     end
   end
 
@@ -140,6 +133,21 @@ class TokensController < ApplicationController
 
     def token_params
       params.require(:token).permit(:institution, :username, :password, :email)
+    end
+
+    def parse_and_create_accounts(response, token)
+      if response.has_key?('accounts')
+        response['accounts'].each do |account|
+          Account.create({
+            user: current_user,
+            token: token,
+            name: account['meta']['official_name'],
+            data: account,
+            service: 'plaid',
+            service_id: account['_id']
+          })
+        end
+      end
     end
 
 end

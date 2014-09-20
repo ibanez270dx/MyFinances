@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917070753) do
+ActiveRecord::Schema.define(version: 20140920050320) do
 
   create_table "accounts", force: true do |t|
     t.integer "user_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140917070753) do
     t.string  "name"
     t.text    "data"
     t.string  "service"
+    t.string  "service_id"
   end
 
   create_table "tokens", force: true do |t|
